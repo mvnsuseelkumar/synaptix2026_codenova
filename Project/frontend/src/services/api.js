@@ -46,6 +46,21 @@ export const applicantAPI = {
     getSkillGap: (jobId) => api.get(`/applicant/skill-gap/${jobId}`),
 };
 
+export const resumeAPI = {
+    upload: (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        return api.post('/resume/upload', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+    },
+    getInfo: () => api.get('/resume/me'),
+    download: () => api.get('/resume/download', { responseType: 'blob' }),
+    delete: () => api.delete('/resume/delete'),
+    getApplicantInfo: (applicantId) => api.get(`/resume/applicant/${applicantId}/info`),
+    downloadApplicant: (applicantId) => api.get(`/resume/applicant/${applicantId}`, { responseType: 'blob' }),
+};
+
 export const recruiterAPI = {
     updateProfile: (data) => api.put('/recruiter/profile', data),
     getMyJobs: () => api.get('/recruiter/jobs'),

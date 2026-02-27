@@ -8,6 +8,7 @@ from routes.job_routes import router as job_router
 from routes.applicant_routes import router as applicant_router
 from routes.recruiter_routes import router as recruiter_router
 from routes.matching_routes import router as matching_router
+from routes.resume_routes import router as resume_router
 
 
 @asynccontextmanager
@@ -37,6 +38,7 @@ app.include_router(job_router)
 app.include_router(applicant_router)
 app.include_router(recruiter_router)
 app.include_router(matching_router)
+app.include_router(resume_router)
 
 
 @app.get("/")
