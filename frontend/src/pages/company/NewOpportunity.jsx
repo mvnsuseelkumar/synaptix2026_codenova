@@ -55,7 +55,6 @@ export default function NewOpportunity() {
 
     const handlePost = () => {
         const formData = form.getValues()
-        if (totalWeight !== 100) { toast.error('Skill weights must sum to 100'); return }
         mutation.mutate({
             ...formData,
             must_have_skills: mustHaveSkills,
@@ -157,7 +156,7 @@ export default function NewOpportunity() {
 
                         {mustHaveSkills.length > 0 && (
                             <div>
-                                <label className="label">Skill Weights (must sum to 100)</label>
+                                <label className="label">Skill Weights</label>
                                 <div className="space-y-3">
                                     {mustHaveSkills.map(skill => (
                                         <div key={skill} className="flex items-center gap-4">
@@ -173,8 +172,8 @@ export default function NewOpportunity() {
                                         </div>
                                     ))}
                                 </div>
-                                <div className={`mt-3 text-sm font-medium ${totalWeight === 100 ? 'text-emerald-400' : 'text-red-400'}`}>
-                                    Total: {totalWeight}/100 {totalWeight === 100 ? '✓' : '(must equal 100)'}
+                                <div className="mt-3 text-sm font-medium text-slate-400">
+                                    Total: {totalWeight}%
                                 </div>
                             </div>
                         )}

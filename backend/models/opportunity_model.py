@@ -17,19 +17,12 @@ class Opportunity(Document):
     location: str = ""
     stipend: str = ""
     must_have_skills: List[str] = []
-    skill_weights: Dict[str, int] = {}  # weights sum to 100
+    skill_weights: Dict[str, int] = {}
     min_score_threshold: float = 2.0
     total_applicants: int = 0
     status: str = "open"  # open | closed | draft
     posted_at: datetime = Field(default_factory=datetime.utcnow)
     deadline: Optional[datetime] = None
-
-    @field_validator("skill_weights")
-    @classmethod
-    def validate_skill_weights(cls, v):
-        if v and sum(v.values()) != 100:
-            raise ValueError("Skill weights must sum to 100")
-        return v
 
     class Settings:
         name = "opportunities"

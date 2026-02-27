@@ -45,13 +45,6 @@ class OpportunityCreateRequest(BaseModel):
     min_score_threshold: float = 2.0
     deadline: Optional[str] = None
 
-    @field_validator("skill_weights")
-    @classmethod
-    def validate_weights(cls, v):
-        if v and sum(v.values()) != 100:
-            raise ValueError("Skill weights must sum to 100")
-        return v
-
 
 class OpportunityUpdateRequest(BaseModel):
     title: Optional[str] = None
