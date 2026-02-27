@@ -28,7 +28,7 @@ export default function Sidebar() {
         <aside className="hidden lg:flex flex-col w-64 min-h-[calc(100vh-4rem)] bg-white/5 dark:bg-slate-900/50 backdrop-blur-sm border-r border-white/10 dark:border-slate-700/50 pt-4 px-3">
             <div className="px-3 mb-4">
                 <p className="text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    {user?.role === 'recruiter' ? 'Recruiter Panel' : 'Applicant Portal'}
+                    {user?.role === 'recruiter' ? 'Recruiter Panel' : 'Job Seeker Portal'}
                 </p>
             </div>
             <nav className="flex-1 space-y-1">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { recruiterAPI, resumeAPI } from '../../services/api';
 import MatchScoreCard from '../../components/MatchScoreCard';
-import { Users, ChevronDown, ChevronUp, CheckCircle, XCircle, Shield, FileText, Download } from 'lucide-react';
+import { Users, ChevronDown, ChevronUp, CheckCircle, XCircle, Shield, FileText, Download, Eye } from 'lucide-react';
 
 export default function Rankings() {
     const [jobs, setJobs] = useState([]);
@@ -36,6 +36,15 @@ export default function Rankings() {
             a.download = fileName || 'resume';
             a.click();
             window.URL.revokeObjectURL(url);
+        } catch (e) { /* ignore */ }
+    };
+
+    const viewResume = async (applicantId) => {
+        try {
+            const res = await resumeAPI.downloadApplicant(applicantId);
+            const blob = new Blob([res.data], { type: res.headers['content-type'] || 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url, '_blank');
         } catch (e) { /* ignore */ }
     };
 
@@ -111,10 +120,16 @@ export default function Rankings() {
                                                     {c.resume_info.uploaded_at && ` — Uploaded: ${new Date(c.resume_info.uploaded_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`}
                                                 </p>
                                             </div>
-                                            <button onClick={() => downloadResume(c.applicant_id, c.resume_info.file_name)}
-                                                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 text-sm font-medium border border-violet-500/20 transition-all">
-                                                <Download className="w-4 h-4" /> Download
-                                            </button>
+                                            <div className="flex items-center gap-2">
+                                                <button onClick={() => viewResume(c.applicant_id)}
+                                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-sm font-medium border border-emerald-500/20 transition-all">
+                                                    <Eye className="w-4 h-4" /> View
+                                                </button>
+                                                <button onClick={() => downloadResume(c.applicant_id, c.resume_info.file_name)}
+                                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 text-sm font-medium border border-violet-500/20 transition-all">
+                                                    <Download className="w-4 h-4" /> Download
+                                                </button>
+                                            </div>
                                         </div>
                                     )}
                                     {!c.has_resume && (

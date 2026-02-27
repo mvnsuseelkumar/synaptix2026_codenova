@@ -51,7 +51,7 @@ export default function Register() {
                         <label className="block text-sm font-medium text-slate-300 mb-2">I am a...</label>
                         <div className="grid grid-cols-2 gap-3">
                             <button type="button" onClick={() => setRole('applicant')} className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${role === 'applicant' ? 'bg-violet-500/10 border-violet-500/40 text-violet-300' : 'bg-white/5 border-white/10 text-slate-400 hover:border-violet-500/20'}`}>
-                                <GraduationCap className="w-6 h-6" /><span className="text-sm font-medium">Applicant</span>
+                                <GraduationCap className="w-6 h-6" /><span className="text-sm font-medium">Job Seeker</span>
                             </button>
                             <button type="button" onClick={() => setRole('recruiter')} className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${role === 'recruiter' ? 'bg-fuchsia-500/10 border-fuchsia-500/40 text-fuchsia-300' : 'bg-white/5 border-white/10 text-slate-400 hover:border-fuchsia-500/20'}`}>
                                 <Briefcase className="w-6 h-6" /><span className="text-sm font-medium">Recruiter</span>

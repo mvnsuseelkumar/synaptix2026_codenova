@@ -30,7 +30,7 @@ export default function Listings() {
                                     {job.company && <span>{job.company}</span>}
                                     {job.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{job.location}</span>}
                                     {job.duration && <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{job.duration}</span>}
-                                    <span className="flex items-center gap-1"><Users className="w-3 h-3" />{job.applicant_count || 0} applicants</span>
+                                    <span className="flex items-center gap-1"><Users className="w-3 h-3" />{job.applicant_count || 0} job seekers</span>
                                 </div>
                                 <div className="flex flex-wrap gap-1.5 mt-2">
                                     {job.required_skills?.map((s) => <span key={s.name} className="px-2 py-0.5 rounded-md text-xs bg-slate-800 text-slate-400 border border-slate-700">{s.name} ({s.weight}%)</span>)}

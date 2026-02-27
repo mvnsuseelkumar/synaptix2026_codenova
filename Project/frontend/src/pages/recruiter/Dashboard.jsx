@@ -86,7 +86,7 @@ export default function RecruiterDashboard() {
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead><tr className="text-left text-sm text-slate-500 border-b border-slate-700">
-                                <th className="pb-3 font-medium">Job Title</th><th className="pb-3 font-medium">Applicants</th><th className="pb-3 font-medium">Avg Score</th><th className="pb-3 font-medium">Best Score</th><th className="pb-3 font-medium"></th>
+                                <th className="pb-3 font-medium">Job Title</th><th className="pb-3 font-medium">Job Seekers</th><th className="pb-3 font-medium">Avg Score</th><th className="pb-3 font-medium">Best Score</th><th className="pb-3 font-medium"></th>
                             </tr></thead>
                             <tbody>
                                 {analytics.jobs_stats.map((job) => (
