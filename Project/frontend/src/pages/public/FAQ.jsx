@@ -22,7 +22,7 @@ export default function FAQ() {
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Frequently Asked <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">Questions</span>
                     </h1>
-                    <p className="text-lg text-slate-400">Everything you need to know about Synaptix.</p>
+                    <p className="text-lg text-slate-400">Everything you need to know about SkillNova.</p>
                 </div>
                 <div className="space-y-3">
                     {faqs.map((faq, i) => (

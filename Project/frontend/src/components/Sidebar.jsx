@@ -45,7 +45,7 @@ export default function Sidebar() {
             </nav>
             <div className="p-3 mb-4">
                 <div className="p-3 rounded-xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20">
-                    <p className="text-xs text-violet-300 font-medium">Synaptix v1.0</p>
+                    <p className="text-xs text-violet-300 font-medium">SkillNova v1.0</p>
                     <p className="text-xs text-slate-500 mt-1">AI-Powered Matching</p>
                 </div>
             </div>

@@ -38,7 +38,7 @@ export default function Login() {
                         </div>
                     </div>
                     <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
-                    <p className="text-slate-400 mt-2">Sign in to your Synaptix account</p>
+                    <p className="text-slate-400 mt-2">Sign in to your SkillNova account</p>
                 </div>
                 <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-5">
                     {error && (

@@ -13,7 +13,7 @@ export default function About() {
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                        About <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">Synaptix</span>
+                        About <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">SkillNova</span>
                     </h1>
                     <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
                         We're on a mission to make hiring fair, transparent, and skill-based. Our AI-powered platform eliminates traditional keyword filtering and replaces it with weighted competency scoring.
@@ -23,7 +23,7 @@ export default function About() {
                 <div className="p-8 rounded-3xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20 mb-12">
                     <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
                     <p className="text-slate-300 leading-relaxed">
-                        Traditional hiring is broken. Keyword filters reject qualified candidates, unconscious bias narrows talent pools, and candidates never know why they were rejected. Synaptix fixes this by building a matching engine that scores candidates on actual competency, explains every decision transparently, and applies fairness-aware algorithms to ensure no one is left behind.
+                        Traditional hiring is broken. Keyword filters reject qualified candidates, unconscious bias narrows talent pools, and candidates never know why they were rejected. SkillNova fixes this by building a matching engine that scores candidates on actual competency, explains every decision transparently, and applies fairness-aware algorithms to ensure no one is left behind.
                     </p>
                 </div>
 
