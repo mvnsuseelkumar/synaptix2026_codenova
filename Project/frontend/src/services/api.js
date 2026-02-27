@@ -44,6 +44,7 @@ export const applicantAPI = {
     getApplications: () => api.get('/applicant/applications'),
     getRecommendations: () => api.get('/applicant/recommendations'),
     getSkillGap: (jobId) => api.get(`/applicant/skill-gap/${jobId}`),
+    validateProject: (data) => api.post('/applicant/validate-project', data),
 };
 
 export const resumeAPI = {

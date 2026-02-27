@@ -9,6 +9,7 @@ from engine.scoring import compute_match_score
 from engine.fairness import apply_fairness_adjustment
 from engine.explainer import generate_explanation
 from engine.skill_gap import analyze_skill_gaps
+from engine.github_validator import validate_github_project
 
 router = APIRouter(prefix="/api/applicant", tags=["Applicant"])
 
@@ -192,3 +193,43 @@ async def get_skill_gap(job_id: str, user: dict = Depends(require_applicant)):
         "company": job.get("company", ""),
         "analysis": gap_analysis
     }
+
+
+@router.post("/validate-project")
+async def validate_project(body: dict, user: dict = Depends(require_applicant)):
+    """Validate a GitHub repo and cross-reference claimed skills."""
+    github_url = body.get("github_url", "").strip()
+    skills_used = body.get("skills_used", [])
+    project_index = body.get("project_index")  # optional: index in projects list
+
+    if not github_url:
+        raise HTTPException(status_code=400, detail="GitHub URL is required")
+    if not skills_used:
+        raise HTTPException(status_code=400, detail="At least one skill must be specified")
+
+    # Run validation
+    result = await validate_github_project(github_url, skills_used)
+
+    # Persist validation result in user's profile projects
+    if project_index is not None and result.get("is_valid"):
+        db = get_db()
+        profile = user.get("profile", {})
+        projects = profile.get("projects", [])
+        if 0 <= project_index < len(projects):
+            projects[project_index]["github_url"] = github_url
+            projects[project_index]["validation"] = {
+                "status": result["status"],
+                "message": result["message"],
+                "confidence_score": result["skill_analysis"]["confidence_score"],
+                "verified_skills": result["skill_analysis"]["verified_skills"],
+                "unmatched_skills": result["skill_analysis"]["unmatched_skills"],
+                "repo_name": result["repo_info"]["full_name"],
+                "languages": result["repo_info"]["languages"],
+                "validated_at": datetime.now(timezone.utc).isoformat()
+            }
+            await db.users.update_one(
+                {"_id": ObjectId(user["_id"])},
+                {"$set": {"profile.projects": projects}}
+            )
+
+    return result

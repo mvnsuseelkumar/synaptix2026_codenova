@@ -128,15 +128,13 @@ export default function MatchScoreCard({ explanation, compact = false }) {
 export function SkillRadarChart({ skills }) {
     const data = skills.map((s) => ({ subject: s.name, value: s.proficiency, fullMark: 10 }));
     return (
-        <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-                <RadarChart data={data}>
-                    <PolarGrid stroke="#334155" />
-                    <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                    <PolarRadiusAxis angle={30} domain={[0, 10]} tick={{ fill: '#64748b', fontSize: 10 }} />
-                    <Radar name="Proficiency" dataKey="value" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.3} />
-                </RadarChart>
-            </ResponsiveContainer>
+        <div className="flex items-center justify-center" style={{ width: '100%', height: '256px' }}>
+            <RadarChart width={350} height={250} data={data}>
+                <PolarGrid stroke="#334155" />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <PolarRadiusAxis angle={30} domain={[0, 10]} tick={{ fill: '#64748b', fontSize: 10 }} />
+                <Radar name="Proficiency" dataKey="value" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.3} />
+            </RadarChart>
         </div>
     );
 }
