@@ -7,11 +7,15 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' },
 })
 
-// Request interceptor — attach JWT
+// Request interceptor — attach JWT and handle FormData
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token')
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
+    }
+    // Let browser set Content-Type with boundary for FormData
+    if (config.data instanceof FormData) {
+        delete config.headers['Content-Type']
     }
     return config
 })

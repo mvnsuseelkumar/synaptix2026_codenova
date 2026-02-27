@@ -31,17 +31,36 @@ except Exception:
 
 
 def compute_semantic_similarity(student_text: str, job_text: str) -> float:
-    """Step 3 — Compute semantic similarity bonus using SBERT."""
-    try:
-        from sentence_transformers import SentenceTransformer, util
+    """Step 3 — Compute semantic similarity bonus using SBERT.
 
+    Skipped entirely if sentence-transformers is not installed or model not cached.
+    """
+    if not student_text or not job_text:
+        return 0.0
+
+    # Quick check: is sentence-transformers even importable?
+    import importlib.util
+    if importlib.util.find_spec("sentence_transformers") is None:
+        return 0.0
+
+    try:
+        import os
+        # Check if model is cached locally before importing (avoid blocking download)
+        cache_dir = os.path.join(os.path.expanduser("~"), ".cache", "torch", "sentence_transformers")
+        if not os.path.exists(cache_dir) or not any(
+            "MiniLM" in d for d in os.listdir(cache_dir) if os.path.isdir(os.path.join(cache_dir, d))
+        ):
+            logger.info("SBERT model not cached, skipping semantic similarity")
+            return 0.0
+
+        from sentence_transformers import SentenceTransformer, util
         model = SentenceTransformer("all-MiniLM-L6-v2")
         embeddings = model.encode([student_text, job_text], convert_to_tensor=True)
         similarity = util.cos_sim(embeddings[0], embeddings[1]).item()
         bonus = min(similarity * 10, SEMANTIC_BONUS_CAP)
         return round(max(bonus, 0), 2)
     except Exception as e:
-        logger.warning(f"Semantic similarity computation failed: {e}")
+        logger.warning(f"Semantic similarity skipped: {e}")
         return 0.0
 
 

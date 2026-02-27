@@ -2,6 +2,32 @@
 
 from typing import Dict, List
 from utils.constants import MAX_SKILL_SCORE
+from utils.skill_normalizer import normalize_skill
+
+
+def _find_skill_in_profile(skill: str, skill_profile: Dict):
+    """Find a skill in the profile using case-insensitive + normalized matching.
+
+    Tries: exact match → lowercase match → normalized alias match.
+    Returns the skill data dict/object or None.
+    """
+    # 1. Exact match
+    if skill in skill_profile:
+        return skill_profile[skill]
+
+    # 2. Case-insensitive match
+    skill_lower = skill.lower()
+    for profile_skill, data in skill_profile.items():
+        if profile_skill.lower() == skill_lower:
+            return data
+
+    # 3. Normalized alias match (e.g. "React" matches "React.js")
+    normalized = normalize_skill(skill).lower()
+    for profile_skill, data in skill_profile.items():
+        if normalize_skill(profile_skill).lower() == normalized:
+            return data
+
+    return None
 
 
 def calculate_weighted_score(
@@ -16,8 +42,10 @@ def calculate_weighted_score(
     breakdown = {}
 
     for skill, weight in skill_weights.items():
-        skill_data = skill_profile.get(skill, {})
-        if hasattr(skill_data, "score"):
+        skill_data = _find_skill_in_profile(skill, skill_profile)
+        if skill_data is None:
+            student_score = 0.0
+        elif hasattr(skill_data, "score"):
             student_score = skill_data.score
         elif isinstance(skill_data, dict):
             student_score = skill_data.get("score", 0.0)
@@ -46,7 +74,7 @@ def check_knockout(
     Returns (passed: bool, fail_reason: str | None).
     """
     for skill in must_have_skills:
-        skill_data = skill_profile.get(skill)
+        skill_data = _find_skill_in_profile(skill, skill_profile)
         if not skill_data:
             return False, f"Missing required skill: {skill}"
 

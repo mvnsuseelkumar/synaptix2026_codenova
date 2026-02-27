@@ -5,9 +5,7 @@ export const updateProfile = (data) => api.put('/student/profile', data)
 export const uploadResume = (file) => {
     const formData = new FormData()
     formData.append('file', file)
-    return api.post('/student/resume/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    return api.post('/student/resume/upload', formData)
 }
 export const getResumeStatus = () => api.get('/student/resume/status')
 export const getOpportunities = (params) => api.get('/student/opportunities', { params })
