@@ -45,7 +45,7 @@ export default function RecruiterDashboard() {
                     <h2 className="text-lg font-semibold text-white mb-4">Score Distribution</h2>
                     {analytics?.score_histogram?.length > 0 ? (
                         <div className="h-56">
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                                 <BarChart data={analytics.score_histogram}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                                     <XAxis dataKey="range" tick={{ fill: '#94a3b8', fontSize: 11 }} />

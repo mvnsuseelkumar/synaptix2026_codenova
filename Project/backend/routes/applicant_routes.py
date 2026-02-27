@@ -65,12 +65,14 @@ async def apply_to_job(job_id: str, user: dict = Depends(require_applicant)):
     candidate_skills = profile.get("skills", [])
     required_skills = job.get("required_skills", [])
     experience = profile.get("experience", [])
+    projects = profile.get("projects", [])
     
     scoring_result = compute_match_score(
         required_skills=required_skills,
         candidate_skills=candidate_skills,
         experience_level=job.get("experience_level", "beginner"),
-        candidate_experience=experience
+        candidate_experience=experience,
+        candidate_projects=projects
     )
     
     explanation = generate_explanation(scoring_result, fairness_adj=0.0)
@@ -143,6 +145,8 @@ async def get_recommendations(user: dict = Depends(require_applicant)):
     cursor = db.jobs.find({"status": "active"}).sort("created_at", -1).limit(50)
     recommendations = []
     
+    projects = profile.get("projects", [])
+
     async for job in cursor:
         required = job.get("required_skills", [])
         experience = profile.get("experience", [])
@@ -151,7 +155,8 @@ async def get_recommendations(user: dict = Depends(require_applicant)):
             required_skills=required,
             candidate_skills=candidate_skills,
             experience_level=job.get("experience_level", "beginner"),
-            candidate_experience=experience
+            candidate_experience=experience,
+            candidate_projects=projects
         )
         
         if scoring_result["total_score"] > 20:

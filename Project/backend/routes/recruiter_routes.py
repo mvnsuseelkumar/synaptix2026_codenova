@@ -61,12 +61,14 @@ async def get_ranked_candidates(job_id: str, user: dict = Depends(require_recrui
         candidate_skills = profile.get("skills", [])
         required_skills = job.get("required_skills", [])
         experience = profile.get("experience", [])
+        projects = profile.get("projects", [])
         
         scoring_result = compute_match_score(
             required_skills=required_skills,
             candidate_skills=candidate_skills,
             experience_level=job.get("experience_level", "beginner"),
-            candidate_experience=experience
+            candidate_experience=experience,
+            candidate_projects=projects
         )
         
         candidates.append({

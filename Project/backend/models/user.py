@@ -28,6 +28,7 @@ class ApplicantProfile(BaseModel):
     location: Optional[str] = None
     education: Optional[List[dict]] = []
     experience: Optional[List[dict]] = []
+    projects: Optional[List[dict]] = []
     skills: Optional[List[SkillProficiency]] = []
     certifications: Optional[List[str]] = []
     portfolio_links: Optional[List[str]] = []

@@ -30,7 +30,7 @@ export default function Analytics() {
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                     <h2 className="text-lg font-semibold text-white mb-4">Score Distribution</h2>
                     <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <BarChart data={data.score_histogram || []}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                                 <XAxis dataKey="range" tick={{ fill: '#94a3b8', fontSize: 11 }} />
@@ -45,7 +45,7 @@ export default function Analytics() {
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                     <h2 className="text-lg font-semibold text-white mb-4">Application Status</h2>
                     <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <PieChart>
                                 <Pie data={statusData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label>
                                     {statusData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -62,7 +62,7 @@ export default function Analytics() {
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                     <h2 className="text-lg font-semibold text-white mb-4">Per-Job Statistics</h2>
                     <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <BarChart data={data.jobs_stats} layout="vertical">
                                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                                 <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 11 }} />

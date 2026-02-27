@@ -71,8 +71,13 @@ async def seed():
                 {"degree": "B.Tech Computer Science", "institution": "IIT Delhi", "year": "2026", "gpa": "8.9"}
             ],
             "experience": [
-                {"title": "ML Intern", "company": "Google", "duration": "3 months", "description": "Worked on NLP models"},
-                {"title": "Web Dev Intern", "company": "Startup XYZ", "duration": "2 months", "description": "Built React dashboards"}
+                {"title": "ML Intern", "company": "Google", "duration": "3 months", "description": "Worked on NLP models using Python and TensorFlow"},
+                {"title": "Web Dev Intern", "company": "Startup XYZ", "duration": "2 months", "description": "Built React dashboards with SQL databases"}
+            ],
+            "projects": [
+                {"name": "Sentiment Analyzer", "description": "NLP sentiment analysis tool", "skills_used": ["Python", "Machine Learning", "TensorFlow"], "duration_months": 4, "complexity": "high"},
+                {"name": "Portfolio Website", "description": "Personal site with React", "skills_used": ["React", "Git"], "duration_months": 1, "complexity": "low"},
+                {"name": "Data Pipeline", "description": "ETL pipeline for analytics", "skills_used": ["Python", "SQL", "Docker"], "duration_months": 3, "complexity": "medium"}
             ],
             "skills": [
                 {"name": "Python", "proficiency": 9},
@@ -104,7 +109,11 @@ async def seed():
                 {"degree": "M.Sc Data Science", "institution": "IISc Bangalore", "year": "2025", "gpa": "9.2"}
             ],
             "experience": [
-                {"title": "Data Analyst Intern", "company": "Analytics Co", "duration": "6 months", "description": "Built dashboards"}
+                {"title": "Data Analyst Intern", "company": "Analytics Co", "duration": "6 months", "description": "Built dashboards using SQL and Tableau"}
+            ],
+            "projects": [
+                {"name": "Sales Dashboard", "description": "Interactive Tableau dashboard", "skills_used": ["Tableau", "SQL", "Statistics"], "duration_months": 2, "complexity": "medium"},
+                {"name": "Census Data Analysis", "description": "Statistical analysis with R", "skills_used": ["R", "Statistics", "Python"], "duration_months": 3, "complexity": "high"}
             ],
             "skills": [
                 {"name": "Python", "proficiency": 8},
@@ -133,6 +142,11 @@ async def seed():
                 {"degree": "B.Tech IT", "institution": "NIT Warangal", "year": "2026", "gpa": "8.5"}
             ],
             "experience": [],
+            "projects": [
+                {"name": "E-Commerce App", "description": "Full-stack online store", "skills_used": ["React", "Node.js", "MongoDB"], "duration_months": 5, "complexity": "high"},
+                {"name": "Chat App", "description": "Real-time chat with WebSockets", "skills_used": ["React", "Node.js", "TypeScript"], "duration_months": 2, "complexity": "medium"},
+                {"name": "CI/CD Pipeline", "description": "Docker deployment automation", "skills_used": ["Docker", "Python"], "duration_months": 1, "complexity": "medium"}
+            ],
             "skills": [
                 {"name": "React", "proficiency": 9},
                 {"name": "Node.js", "proficiency": 8},
