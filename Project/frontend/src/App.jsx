@@ -27,6 +27,7 @@ import PostJob from './pages/recruiter/PostJob';
 import Listings from './pages/recruiter/Listings';
 import Rankings from './pages/recruiter/Rankings';
 import Analytics from './pages/recruiter/Analytics';
+import ChatBot from './components/ChatBot';
 
 function DashboardLayout() {
   return (
@@ -37,6 +38,12 @@ function DashboardLayout() {
       </main>
     </div>
   );
+}
+
+function ChatBotWrapper() {
+  const { user } = useAuth();
+  if (!user || user.role !== 'applicant') return null;
+  return <ChatBot />;
 }
 
 function AppRoutes() {
@@ -86,6 +93,7 @@ export default function App() {
           <div className="min-h-screen bg-slate-950">
             <Navbar />
             <AppRoutes />
+            <ChatBotWrapper />
           </div>
         </BrowserRouter>
       </AuthProvider>
