@@ -71,6 +71,16 @@ async def get_ranked_candidates(job_id: str, user: dict = Depends(require_recrui
             candidate_projects=projects
         )
         
+        # Resume info
+        resume = applicant.get("resume")
+        resume_info = None
+        if resume and resume.get("stored_name"):
+            resume_info = {
+                "file_name": resume.get("original_name", ""),
+                "file_type": resume.get("file_type", ""),
+                "uploaded_at": resume.get("uploaded_at", "")
+            }
+
         candidates.append({
             "application_id": str(app["_id"]),
             "applicant_id": app["applicant_id"],
@@ -85,7 +95,9 @@ async def get_ranked_candidates(job_id: str, user: dict = Depends(require_recrui
             "skill_coverage": scoring_result["skill_coverage"],
             "confidence": scoring_result["confidence"],
             "skills": candidate_skills,
-            "applied_at": app.get("applied_at", "")
+            "applied_at": app.get("applied_at", ""),
+            "has_resume": resume_info is not None,
+            "resume_info": resume_info
         })
     
     # Apply fairness adjustments
