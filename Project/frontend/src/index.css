@@ -21,36 +21,133 @@ body {
   min-height: 100vh;
 }
 
+/* ===========================
+   DARK THEME (Default)
+   =========================== */
 .dark body,
 .dark {
   background-color: #020617;
   color: #e2e8f0;
 }
 
+/* ===========================
+   LIGHT THEME — Comprehensive
+   =========================== */
 .light body,
 .light {
-  background-color: #f8fafc;
+  background-color: #f1f5f9;
   color: #1e293b;
 }
 
-.light .bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.8);
+/* --- Backgrounds --- */
+.light .bg-white\/5,
+.light .bg-white\/\[0\.02\] {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-.light .border-white\/10 {
-  border-color: rgba(0, 0, 0, 0.1);
+.light .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .light .bg-slate-800 {
-  background-color: #fff;
+  background-color: #ffffff;
+}
+
+.light .bg-slate-800\/50 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.light .bg-slate-900,
+.light .bg-slate-900\/50,
+.light .bg-slate-950 {
+  background-color: #f1f5f9;
+}
+
+/* --- Hover states for sidebar/nav links (light mode) --- */
+.light .hover\:text-white:hover {
+  color: #1e293b !important;
+}
+
+.light .hover\:text-slate-200:hover {
+  color: #334155 !important;
+}
+
+.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* --- Gradient text fix for light mode (keep gradient visible) --- */
+.light .bg-gradient-to-r.from-violet-400.to-fuchsia-400 {
+  /* Keep gradient text as-is — it's brand purple and looks fine on light */
+}
+
+/* --- Sidebar active link in light mode --- */
+.light .from-violet-500\/20 {
+  --tw-gradient-from: rgba(139, 92, 246, 0.1);
+}
+
+.light .to-fuchsia-500\/20 {
+  --tw-gradient-to: rgba(217, 70, 239, 0.08);
+}
+
+/* --- Auth & Public page dark gradient overlays --- */
+.light .from-violet-950\/30,
+.light .from-violet-950\/50 {
+  --tw-gradient-from: rgba(245, 243, 255, 0.8);
+}
+
+.light .via-slate-950 {
+  --tw-gradient-via: rgba(241, 245, 249, 0.95);
+}
+
+.light .to-slate-950 {
+  --tw-gradient-to: #f1f5f9;
+}
+
+/* --- Dashboard welcome card gradient --- */
+.light .from-violet-500\/10 {
+  --tw-gradient-from: rgba(139, 92, 246, 0.07);
+}
+
+.light .to-fuchsia-500\/10 {
+  --tw-gradient-to: rgba(217, 70, 239, 0.05);
+}
+
+/* --- Glow blurs — hide on light mode --- */
+.light .blur-3xl {
+  opacity: 0.15;
+}
+
+.light .bg-slate-700 {
+  background-color: #e2e8f0;
+}
+
+.light .bg-slate-700\/50 {
+  background-color: rgba(226, 232, 240, 0.5);
+}
+
+/* --- Borders --- */
+.light .border-white\/10,
+.light .border-white\/20 {
+  border-color: #e2e8f0;
 }
 
 .light .border-slate-700 {
   border-color: #e2e8f0;
 }
 
+.light .border-slate-700\/50 {
+  border-color: rgba(226, 232, 240, 0.6);
+}
+
+.light .border-slate-600 {
+  border-color: #cbd5e1;
+}
+
+/* --- Text Colors --- */
 .light .text-white {
-  color: #1e293b;
+  color: #0f172a;
 }
 
 .light .text-slate-300 {
@@ -65,6 +162,187 @@ body {
   color: #94a3b8;
 }
 
+.light .text-slate-600 {
+  color: #475569;
+}
+
+.light .placeholder-slate-600::placeholder {
+  color: #94a3b8;
+}
+
+/* --- Navbar / Sidebar / Layout --- */
+.light nav,
+.light aside {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+}
+
+.light header {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+/* --- Cards & Sections --- */
+.light .backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+.light section {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-color: #e2e8f0;
+}
+
+/* --- Inputs & Select --- */
+.light input,
+.light textarea,
+.light select {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: #8b5cf6 !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* --- Buttons --- */
+.light .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light .hover\:bg-white\/\[0\.02\]:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* --- Badge/Tag chips (keep accent colors, adjust bg) --- */
+.light .bg-violet-500\/10 {
+  background-color: rgba(139, 92, 246, 0.08);
+}
+
+.light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.08);
+}
+
+.light .bg-red-500\/10 {
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.light .bg-amber-500\/10 {
+  background-color: rgba(245, 158, 11, 0.08);
+}
+
+.light .bg-cyan-500\/10 {
+  background-color: rgba(6, 182, 212, 0.08);
+}
+
+.light .bg-blue-500\/10 {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.light .bg-fuchsia-500\/10 {
+  background-color: rgba(217, 70, 239, 0.08);
+}
+
+.light .bg-violet-500\/20 {
+  background-color: rgba(139, 92, 246, 0.12);
+}
+
+.light .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.12);
+}
+
+.light .bg-red-500\/20 {
+  background-color: rgba(239, 68, 68, 0.12);
+}
+
+.light .bg-amber-500\/20 {
+  background-color: rgba(245, 158, 11, 0.12);
+}
+
+.light .bg-violet-500\/5 {
+  background-color: rgba(139, 92, 246, 0.05);
+}
+
+/* --- Accent borders --- */
+.light .border-violet-500\/20 {
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.light .border-violet-500\/30 {
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.light .border-emerald-500\/20 {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.light .border-red-500\/20 {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.light .border-amber-500\/20 {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* --- Charts --- */
+.light .recharts-cartesian-grid line {
+  stroke: #e2e8f0 !important;
+}
+
+/* --- Scrollbar (light) --- */
+.light::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+.light::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* --- Tables --- */
+.light table th {
+  color: #64748b;
+}
+
+.light table td {
+  color: #334155;
+}
+
+.light .border-b.border-slate-700 {
+  border-color: #e2e8f0;
+}
+
+.light .border-b.border-slate-700\/50 {
+  border-color: rgba(226, 232, 240, 0.6);
+}
+
+/* --- Stat cards background for dark gradient overrides --- */
+.light .bg-gradient-to-br {
+  opacity: 0.95;
+}
+
+/* --- Range input --- */
+.light input[type="range"] {
+  background: #e2e8f0 !important;
+}
+
+.light input[type="range"]::-webkit-slider-thumb {
+  border-color: #f8fafc !important;
+}
+
+/* ===========================
+   DARK SCROLLBAR
+   =========================== */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -82,12 +360,18 @@ body {
   background: #475569;
 }
 
+/* ===========================
+   Smooth transitions on theme toggle
+   =========================== */
 * {
-  transition-property: background-color, border-color, color;
+  transition-property: background-color, border-color, color, box-shadow;
   transition-duration: 200ms;
   transition-timing-function: ease;
 }
 
+/* ===========================
+   Animations
+   =========================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -104,6 +388,9 @@ body {
   animation: fadeIn 0.3s ease-out;
 }
 
+/* ===========================
+   Range Input (dark default)
+   =========================== */
 input[type="range"] {
   -webkit-appearance: none;
   height: 6px;
