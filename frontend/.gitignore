@@ -1,0 +1,5 @@
+# Frontend dependencies
+node_modules/
+
+# Build folder
+dist/

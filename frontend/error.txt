@@ -1,0 +1,18 @@
+Command failed: npx vite build
+[31mx[39m Build failed in 1.86s
+[31merror during build:
+[31m[vite:build-import-analysis] [plugin vite:build-import-analysis] src/hooks/useAuth.js (50:31): Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.[31m
+file: [36mD:/CodeNova/frontend/src/hooks/useAuth.js:50:31[31m
+[33m
+48:         <AuthContext.Provider value={{ user, loading, loginUser, logoutUser, loadUser }}>
+49:             {children}
+50:         </AuthContext.Provider>
+                                   ^
+51:     )
+52: }
+[31m
+    at getRollupError (file:///D:/CodeNova/frontend/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///D:/CodeNova/frontend/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Object.error (file:///D:/CodeNova/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22249:20)
+    at Object.error (file:///D:/CodeNova/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21298:42)
+    at Object.transform (file:///D:/CodeNova/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64913:14)[39m
