@@ -2,16 +2,28 @@
 
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, Depends, status
-from pydantic import BaseModel, EmailStr, Field
-from passlib.context import CryptContext
+from pydantic import BaseModel, Field
 from typing import Optional, List
+import bcrypt
 
 from models.student_model import Student, ProfileMeta
 from models.company_model import Company
 from utils.jwt_utils import create_access_token, get_current_user
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def hash_password(password: str) -> str:
+    """Hash password using bcrypt directly (avoids passlib/bcrypt version conflicts)."""
+    pw_bytes = password.encode("utf-8")[:72]  # bcrypt 72-byte limit
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(pw_bytes, salt).decode("utf-8")
+
+
+def verify_password(password: str, hashed: str) -> bool:
+    """Verify password against bcrypt hash."""
+    pw_bytes = password.encode("utf-8")[:72]
+    return bcrypt.checkpw(pw_bytes, hashed.encode("utf-8"))
 
 
 # ── Request / Response schemas ──────────────────────────
@@ -56,7 +68,7 @@ async def register_student(req: StudentRegisterRequest):
         student = Student(
             name=req.name,
             email=req.email,
-            password_hash=pwd_context.hash(req.password),
+            password_hash=hash_password(req.password),
             role="student",
             profile_meta=ProfileMeta(domain_preference=req.domain_preference),
             created_at=datetime.utcnow(),
@@ -86,7 +98,7 @@ async def register_company(req: CompanyRegisterRequest):
         company = Company(
             name=req.name,
             email=req.email,
-            password_hash=pwd_context.hash(req.password),
+            password_hash=hash_password(req.password),
             role="company",
             industry=req.industry,
             created_at=datetime.utcnow(),
@@ -110,7 +122,7 @@ async def login(req: LoginRequest):
     try:
         # Try student first
         student = await Student.find_one(Student.email == req.email)
-        if student and pwd_context.verify(req.password, student.password_hash):
+        if student and verify_password(req.password, student.password_hash):
             token = create_access_token({"sub": str(student.id), "role": "student"})
             return TokenResponse(
                 access_token=token, role="student",
@@ -119,7 +131,7 @@ async def login(req: LoginRequest):
 
         # Try company
         company = await Company.find_one(Company.email == req.email)
-        if company and pwd_context.verify(req.password, company.password_hash):
+        if company and verify_password(req.password, company.password_hash):
             token = create_access_token({"sub": str(company.id), "role": "company"})
             return TokenResponse(
                 access_token=token, role="company",
